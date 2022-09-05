@@ -1,9 +1,9 @@
 package me.jimmyberg.springbatchwithquerydsl.config.step
 
 import me.jimmyberg.springbatchwithquerydsl.entity.Member
+import org.slf4j.LoggerFactory
 import org.springframework.batch.core.Step
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory
-import org.springframework.batch.core.step.tasklet.Tasklet
 import org.springframework.batch.repeat.RepeatStatus
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -14,15 +14,16 @@ class MemberStepConfig(
     val stepBuilderFactory: StepBuilderFactory,
     val entityManagerFactory: EntityManagerFactory
 ) {
+    private val logger = LoggerFactory.getLogger(this::class.java)
 
     @Bean
     fun step() =
         stepBuilderFactory
             .get("BATCH_STEP")
-            .tasklet(Tasklet { _, _ ->
-                println("Hello Spring Batch!")
+            .tasklet { _, _ ->
+                logger.info("Hello Spring Batch!")
                 RepeatStatus.FINISHED
-            })
+            }
             .build()
 
     @Bean
