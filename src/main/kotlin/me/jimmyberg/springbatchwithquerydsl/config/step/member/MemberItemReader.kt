@@ -1,4 +1,4 @@
-package me.jimmyberg.springbatchwithquerydsl.config.step
+package me.jimmyberg.springbatchwithquerydsl.config.step.member
 
 import me.jimmyberg.springbatchwithquerydsl.entity.Member
 import org.springframework.batch.item.database.JpaPagingItemReader

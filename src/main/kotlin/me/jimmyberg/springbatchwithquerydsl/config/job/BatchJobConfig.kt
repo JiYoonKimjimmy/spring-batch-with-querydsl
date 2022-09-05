@@ -5,6 +5,8 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @EnableBatchProcessing
 @Configuration
@@ -14,9 +16,9 @@ class BatchJobConfig(
 ) {
 
     @Bean
-    fun job() =
+    fun batchJob() =
         jobBuilderFactory
-            .get("BATCH_JOB")
+            .get("BATCH_JOB_${LocalDate.now().format(DateTimeFormatter.ISO_DATE)}")
             .start(memberStep)
             .build()
 

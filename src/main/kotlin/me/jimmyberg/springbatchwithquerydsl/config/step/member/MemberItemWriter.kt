@@ -1,4 +1,4 @@
-package me.jimmyberg.springbatchwithquerydsl.config.step
+package me.jimmyberg.springbatchwithquerydsl.config.step.member
 
 import me.jimmyberg.springbatchwithquerydsl.entity.Member
 import org.slf4j.LoggerFactory
@@ -9,7 +9,7 @@ class MemberItemWriter : ItemWriter<Member> {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     override fun write(items: List<Member>) {
-        items.forEach { logger.info("$it") }
+        items.forEach { logger.info("ITEM : [ $it ]") }
     }
 
 }
