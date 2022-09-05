@@ -18,8 +18,7 @@ class BatchJobConfigTest {
     lateinit var jobLauncherTestUtils: JobLauncherTestUtils
 
     @Test
-    fun test() {
-        println("Hello World")
+    fun executeBatchJobTest() {
         val jobExecution = jobLauncherTestUtils.launchJob()
         val stepException = jobExecution.stepExecutions.first()
 
