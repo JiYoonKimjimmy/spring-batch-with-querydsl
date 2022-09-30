@@ -15,11 +15,12 @@
 ---
 
 ## Build Project
-- Kotlin 1.5.31
-- Spring Batch 2.5.6
-- Spring Data JPA 2.5.6
+- Kotlin
+- Spring Batch
+- Spring Data JPA
 - QueryDSL
-- H2 Database
+- MariaDB
+- H2 Database (only TEST)
 
 ---
 
