@@ -55,3 +55,29 @@ plugins {
 ```
 
 #### 참고 글 : https://stackoverflow.com/questions/32038177/kotlin-with-jpa-default-constructor-hell
+
+### `EntityManager.close()` 무한 호출 문제
+- `AbstractPagingItemReader` 클래스를 구현한 `QuerydslJpaPagingItemReader` 클래스의 `doClose()` 가 무한 호출되는 문제 발생
+- `doClose()` 함수에서 `entityManager` 가 **Open** 상태일 때만, `.close()` 호출하여 무한 호출 방지
+
+```kotlin
+override fun doClose() {
+    if (entityManager.isOpen) {
+        entityManager.close()
+        super.close()
+    }
+}
+```
+
+- 알고보니, `AbstractPagingItemReader` 클래스가 아닌 `AbstractItemCountingItemStreamItemReader` 의 `close()` 함수가 먼저 호출되어 `doClose()` 함수를 재호출하여 무한 호출 문제 발생
+- `entityManager.close()` 만 호출하고 종료
+
+```kotlin
+override fun doClose() {
+    entityManager.close()
+    // 삭제
+    // super.close()
+}
+```
+
+---

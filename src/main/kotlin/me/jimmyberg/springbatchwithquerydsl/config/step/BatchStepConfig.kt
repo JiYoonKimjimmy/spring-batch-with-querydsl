@@ -1,8 +1,8 @@
 package me.jimmyberg.springbatchwithquerydsl.config.step
 
 import me.jimmyberg.springbatchwithquerydsl.config.step.member.MemberItemProcessor
-import me.jimmyberg.springbatchwithquerydsl.config.step.member.MemberItemReader
 import me.jimmyberg.springbatchwithquerydsl.config.step.member.MemberItemWriter
+import me.jimmyberg.springbatchwithquerydsl.config.step.member.MemberQuerydslItemReader
 import me.jimmyberg.springbatchwithquerydsl.entity.Member
 import org.slf4j.LoggerFactory
 import org.springframework.batch.core.Step
@@ -35,7 +35,7 @@ class BatchStepConfig(
         stepBuilderFactory
             .get("MEMBER_STEP")
             .chunk<Member, Member>(1)
-            .reader(MemberItemReader(entityManagerFactory = entityManagerFactory))
+            .reader(MemberQuerydslItemReader(entityManagerFactory = entityManagerFactory))
             .processor(MemberItemProcessor())
             .writer(MemberItemWriter())
             .build()
