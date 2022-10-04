@@ -19,6 +19,7 @@ class BatchStepConfig(
 ) {
 
     private val logger = LoggerFactory.getLogger(this::class.java)
+    private val chunkSize = 100
 
     @Bean
     fun simpleStep() =
@@ -34,8 +35,8 @@ class BatchStepConfig(
     fun memberStep(): Step =
         stepBuilderFactory
             .get("MEMBER_STEP")
-            .chunk<Member, Member>(100)
-            .reader(MemberQuerydslItemReader(entityManagerFactory = entityManagerFactory))
+            .chunk<Member, Member>(chunkSize)
+            .reader(MemberQuerydslItemReader(entityManagerFactory = entityManagerFactory, chunkSize = chunkSize))
             .processor(MemberItemProcessor())
             .writer(MemberItemWriter(entityManagerFactory = entityManagerFactory))
             .build()
