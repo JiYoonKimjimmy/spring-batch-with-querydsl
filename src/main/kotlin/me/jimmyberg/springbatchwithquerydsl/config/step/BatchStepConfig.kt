@@ -34,10 +34,10 @@ class BatchStepConfig(
     fun memberStep(): Step =
         stepBuilderFactory
             .get("MEMBER_STEP")
-            .chunk<Member, Member>(1)
+            .chunk<Member, Member>(100)
             .reader(MemberQuerydslItemReader(entityManagerFactory = entityManagerFactory))
             .processor(MemberItemProcessor())
-            .writer(MemberItemWriter())
+            .writer(MemberItemWriter(entityManagerFactory = entityManagerFactory))
             .build()
 
 }

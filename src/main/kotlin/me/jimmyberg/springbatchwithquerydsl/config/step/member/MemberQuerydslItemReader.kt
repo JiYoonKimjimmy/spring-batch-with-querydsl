@@ -17,6 +17,9 @@ class MemberQuerydslItemReader(
             val member = QMember.member
             jpaQueryFactory
                 .selectFrom(member)
+                .where(
+                    member.name.length().goe(3)
+                )
                 .orderBy(member.id.asc())
         }
     }

@@ -41,10 +41,6 @@ open class QuerydslJpaPagingItemReader<T> : AbstractPagingItemReader<T>() {
 
     override fun doJumpToPage(itemIndex: Int) {}
 
-    override fun doClose() {
-        entityManager.close()
-    }
-
     private fun getTxOfNull(): EntityTransaction? =
         if (transacted) {
             val tx = entityManager.transaction
